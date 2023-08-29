@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     productList: [],
@@ -19,11 +19,6 @@ const baiTapFormSlice = createSlice({
             state.productEdit = payload
         },
         updateProduct: (state, { payload }) => {
-            //C1:
-            // const index = state.productList.findIndex((prd) => prd.id === payload.id)
-            // state.productList[index] = payload
-
-            //C2:
             state.productList = state.productList.map((prd) => {
                 if (prd.id === payload.id) {
                     return payload
@@ -35,6 +30,6 @@ const baiTapFormSlice = createSlice({
         },
     },
     extraReducers: () => {},
-})
+});
 
-export const { reducer: baiTapFormReducer, actions: baiTapFormActions } = baiTapFormSlice
+export const { reducer: baiTapFormReducer, actions: baiTapFormActions } = baiTapFormSlice;

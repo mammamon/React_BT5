@@ -1,34 +1,18 @@
-import React, {
-    useEffect,
-    useState,
-    useMemo,
-    memo,
-    useCallback,
-    useRef,
-    useContext,
-    useTransition,
-} from 'react'
-// import { flushSync } from 'react-dom'
+import React, {useState, useEffect,} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { baiTapFormActions } from '../store/baiTapForm/slice'
 
 const ProductForm = () => {
     const [formValue, setFormValue] = useState()
     const [formError, setFormError] = useState()
-
     const { productEdit } = useSelector((state) => state.baiTapForm)
     console.log('productEdit: ', productEdit)
-
     const dispatch = useDispatch()
-
     const validate = (element) => {
         const { validity, minLength, title, value } = element
         console.log('validity: ', validity)
-
         const { valueMissing, tooShort, patternMismatch } = validity
-
         let mess = ''
-
         if (valueMissing) {
             mess = `Vui lòng nhập ${title}`
         } else if (tooShort || value.length < minLength) {
@@ -39,24 +23,9 @@ const ProductForm = () => {
         return mess
     }
 
-    //currying function
     const handleFormValue = () => (ev) => {
         const { name, value } = ev.target
         let mess = validate(ev.target)
-
-        // console.log('validity: ', validity)
-        // const { valueMissing, tooShort, patternMismatch } = validity
-
-        // let mess = ''
-
-        // if (valueMissing) {
-        //     mess = `Vui lòng nhập ${title}`
-        // } else if (tooShort) {
-        //     mess = `Vui lòng nhập ${title} tối thiểu ${minLength} ký tự`
-        // } else if (patternMismatch) {
-        //     mess = `Vui lòng nhập đúng ${title}`
-        // }
-
         setFormError({
             ...formError,
             [name]: mess,
@@ -69,9 +38,6 @@ const ProductForm = () => {
     }
 
     useEffect(() => {
-        // if (!productEdit) return
-        // setFormValue(productEdit)
-
         if (productEdit) {
             setFormValue(productEdit)
         }
@@ -80,8 +46,6 @@ const ProductForm = () => {
     console.log('RENDER')
     return (
         <div>
-            {/* button ở trong form mặc định sẽ có type là submit */}
-
             <form
                 noValidate
                 onSubmit={(ev) => {
@@ -95,11 +59,6 @@ const ProductForm = () => {
                     elements.forEach((ele) => {
                         const { name } = ele
                         errors[name] = validate(ele)
-                        // flushSync(
-                        //     setFormError(() => {
-                        //         return (errors[name] = validate(ele))
-                        //     })
-                        // )
                     })
                     setFormError(errors)
                     let isFlag = false
