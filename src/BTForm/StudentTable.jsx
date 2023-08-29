@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { baiTapFormActions } from '../store/baiTapForm/slice';
 
 const StudentTable = () => {
-  const { productList } = useSelector((state) => state.baiTapForm);
+  const { studentList } = useSelector((state) => state.baiTapForm);
 
   const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const StudentTable = () => {
           </tr>
         </thead>
         <tbody>
-          {productList.map((student) => (
+          {studentList.map((student) => (
             <tr key={student.maSV}>
               <td>{student.maSV}</td>
               <td>{student.hoTen}</td>
@@ -31,7 +31,7 @@ const StudentTable = () => {
                   <button
                     className="btn btn-success"
                     onClick={() => {
-                      dispatch(baiTapFormActions.editProduct(student));
+                      dispatch(baiTapFormActions.editStudent(student));
                     }}
                   >
                     Edit
@@ -39,7 +39,7 @@ const StudentTable = () => {
                   <button
                     className="btn btn-danger"
                     onClick={() => {
-                      dispatch(baiTapFormActions.deleteProduct(student.maSV));
+                      dispatch(baiTapFormActions.deleteStudent(student.maSV));
                     }}
                   >
                     Delete
