@@ -1,0 +1,17 @@
+export const PATH = {
+    baiTapComponent: '/btcomponent',
+    bindingData: '/bindingdata',
+    renderCondition: '/rendercondition',
+    handleEvent: '/handleevent',
+    styledComponent: '/stylecomponent',
+    renderMap: '/rendermap',
+    movieDetail: '/movie/:movieId',
+    demoState: '/demoState',
+    demoProps: '/demoprops',
+    baiTapShoeShop: '/btshoeshop',
+    redux: '/redux',
+    baiTapPhone: '/redux/btphone',
+    baiTapMovie: '/redux/btmovie',
+    baiTapForm: '/btform',
+    useEffect: '/useEffect',
+}
