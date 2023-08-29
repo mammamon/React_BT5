@@ -1,13 +1,13 @@
 import React from 'react';
-import ProductForm from './ProductForm';
-import ProductTable from './ProductTable';
+import StudentForm from './StudentForm';
+import StudentTable from './StudentTable';
 
 const BTForm = () => {
   return (
     <div>
-      <h1>BT Form</h1>
-      <ProductForm />
-      <ProductTable />
+      <h1>Thông tin sinh viên</h1>
+      <StudentForm />
+      <StudentTable />
     </div>
   );
 };
