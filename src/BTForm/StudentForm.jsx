@@ -199,7 +199,7 @@ const StudentForm = () => {
                 {/* Submit button */}
                 <div className="col-md-12">
                     <button type="submit" className="btn btn-primary">
-                        Add Student
+                        Tnêm sinh viên
                     </button>
                 </div>
             </form>

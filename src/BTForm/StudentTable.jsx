@@ -16,7 +16,7 @@ const StudentTable = () => {
             <th>Họ Tên</th>
             <th>Số điện thoại</th>
             <th>Email</th>
-            <th></th>
+            <th className='text-center'>Quản lý</th>
           </tr>
         </thead>
         <tbody>
@@ -27,9 +27,9 @@ const StudentTable = () => {
               <td>{student.soDienThoai}</td>
               <td>{student.email}</td>
               <td>
-                <div className="d-flex gap-3">
+                <div className="d-flex justify-content-center gap-3">
                   <button
-                    className="btn btn-success"
+                    className="btn-edit btn btn-success"
                     onClick={() => {
                       dispatch(baiTapFormActions.editStudent(student));
                     }}
@@ -37,7 +37,7 @@ const StudentTable = () => {
                     Edit
                   </button>
                   <button
-                    className="btn btn-danger"
+                    className="btn-delete btn btn-danger"
                     onClick={() => {
                       dispatch(baiTapFormActions.deleteStudent(student.maSV));
                     }}
