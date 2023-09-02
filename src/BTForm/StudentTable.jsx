@@ -4,7 +4,6 @@ import { baiTapFormActions } from '../store/baiTapForm/slice';
 
 const StudentTable = () => {
   const { studentList } = useSelector((state) => state.baiTapForm);
-
   const dispatch = useDispatch();
 
   return (
@@ -12,21 +11,21 @@ const StudentTable = () => {
       <table className="table">
         <thead className="table-dark">
           <tr>
-            <th>Mã sinh viên</th>
-            <th>Họ Tên</th>
-            <th>Số điện thoại</th>
-            <th>Email</th>
+            <th className="text-center">Mã sinh viên</th>
+            <th className="text-center">Họ Tên</th>
+            <th className="text-center">Số điện thoại</th>
+            <th className="text-center">Email</th>
             <th className='text-center'>Quản lý</th>
           </tr>
         </thead>
         <tbody>
           {studentList.map((student) => (
             <tr key={student.maSV}>
-              <td>{student.maSV}</td>
-              <td>{student.hoTen}</td>
-              <td>{student.soDienThoai}</td>
-              <td>{student.email}</td>
-              <td>
+              <td className="text-center">{student.maSV}</td>
+              <td className="text-center">{student.hoTen}</td>
+              <td className="text-center">{student.soDienThoai}</td>
+              <td className="text-center">{student.email}</td>
+              <td className="text-center">
                 <div className="d-flex justify-content-center gap-3">
                   <button
                     className="btn-edit btn btn-success"
