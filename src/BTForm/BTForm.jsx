@@ -1,16 +1,15 @@
 import React from 'react';
 import StudentForm from './StudentForm';
 import StudentTable from './StudentTable';
-import { useSelector } from 'react-redux'; // Import useSelector to access Redux state
+import { useSelector } from 'react-redux';
 
 const BTForm = () => {
-  // Access the studentList data from your Redux store
   const { studentList } = useSelector((state) => state.baiTapForm);
-
   return (
     <div>
-      <h1>Thông tin sinh viên</h1>
-      {/* Pass studentList as a prop to StudentForm */}
+      <div className='p-2 mb-4 bg-dark'>
+        <h2 className='text-white'>Thông tin sinh viên</h2>
+      </div>
       <StudentForm studentList={studentList} />
       <StudentTable />
     </div>

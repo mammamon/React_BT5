@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { baiTapFormActions } from '../store/baiTapForm/slice';
 import '../App.css';
 
-const StudentForm = ({studentList}) => {
-  // State to manage form values and errors
+const StudentForm = ({ studentList }) => {
   const [formValue, setFormValue] = useState({
     maSV: '',
     hoTen: '',
@@ -19,18 +18,16 @@ const StudentForm = ({studentList}) => {
     email: '',
   });
 
-  // Redux dispatch and state
   const dispatch = useDispatch();
   const { studentEdit } = useSelector((state) => state.baiTapForm);
 
-  // Update form values when studentEdit changes
+  // Cập nhật input value khi giá trị thay đổi
   useEffect(() => {
     if (studentEdit) {
       setFormValue(studentEdit);
     }
   }, [studentEdit]);
 
-  // Function to handle input changes and update form values and errors
   const handleFormValue = (name) => (ev) => {
     const { value } = ev.target;
 
@@ -45,7 +42,7 @@ const StudentForm = ({studentList}) => {
     });
   };
 
-  // Validation function to validate input values
+  // Đặt điều kiện và thông báo khi điều kiện lỗi
   const validate = (name, value) => {
     switch (name) {
       case 'maSV':
@@ -71,73 +68,9 @@ const StudentForm = ({studentList}) => {
       default:
         break;
     }
-    return ''; // No error
+    return '';
   };
-
-  // Function to handle form submission for adding a student
-const handleSubmitAdd = (ev) => {
-  ev.preventDefault();
-
-  // Validate each field and update form errors
-  const errors = validateForm();
-  if (hasErrors(errors)) {
-    return;
-  }
-
-  // Check for duplication of mã sinh viên, số điện thoại, and email
-  const duplicateMaSV = studentList.some(
-    (student) => student.maSV === formValue.maSV
-  );
-  const duplicateSoDienThoai = studentList.some(
-    (student) => student.soDienThoai === formValue.soDienThoai
-  );
-  const duplicateEmail = studentList.some(
-    (student) => student.email === formValue.email
-  );
-
-  if (duplicateMaSV) {
-    errors.maSV = 'Mã sinh viên đã tồn tại';
-  }
-  if (duplicateSoDienThoai) {
-    errors.soDienThoai = 'Số điện thoại đã tồn tại';
-  }
-  if (duplicateEmail) {
-    errors.email = 'Email đã tồn tại';
-  }
-
-  setFormError(errors);
-
-  // Check if there are any errors
-  if (hasErrors(errors)) {
-    return;
-  }
-
-  // Dispatch action to add student to the store
-  dispatch(baiTapFormActions.addStudent(formValue));
-
-  // Clear form values after submission
-  clearForm();
-};
-
-
-  // Function to handle form submission for updating a student
-  const handleSubmitUpdate = (ev) => {
-    ev.preventDefault();
-
-    // Validate each field and update form errors
-    const errors = validateForm();
-    if (hasErrors(errors)) {
-      return;
-    }
-
-    // Dispatch action to update student in the store
-    dispatch(baiTapFormActions.updateStudent(formValue));
-
-    // Clear form values after submission
-    clearForm();
-  };
-
-  // Function to validate all form fields and update form errors
+  // check điều kiện và hiện thông báo nếu có lỗi
   const validateForm = () => {
     const errors = {};
     for (const key in formValue) {
@@ -148,12 +81,12 @@ const handleSubmitAdd = (ev) => {
     return errors;
   };
 
-  // Function to check if there are any form errors
+  // kiểm tra form có lỗi nào không
   const hasErrors = (errors) => {
     return Object.values(errors).some((error) => error !== '');
   };
 
-  // Function to clear form values
+  // làm trống form
   const clearForm = () => {
     setFormValue({
       maSV: '',
@@ -163,10 +96,62 @@ const handleSubmitAdd = (ev) => {
     });
   };
 
+  //handle thêm sinh viên
+  const handleSubmitAdd = (ev) => {
+    ev.preventDefault();
+    // Check điều kiện lỗi
+    const errors = validateForm();
+    if (hasErrors(errors)) {
+      return;
+    }
+    // Kiểm tra trùng lặp mã sinh viên, số điện thoại, and email
+    const duplicateMaSV = studentList.some(
+      (student) => student.maSV === formValue.maSV
+    );
+    const duplicateSoDienThoai = studentList.some(
+      (student) => student.soDienThoai === formValue.soDienThoai
+    );
+    const duplicateEmail = studentList.some(
+      (student) => student.email === formValue.email
+    );
+
+    if (duplicateMaSV) {
+      errors.maSV = 'Mã sinh viên đã tồn tại';
+    }
+    if (duplicateSoDienThoai) {
+      errors.soDienThoai = 'Số điện thoại đã tồn tại';
+    }
+    if (duplicateEmail) {
+      errors.email = 'Email đã tồn tại';
+    }
+
+    setFormError(errors);
+    if (hasErrors(errors)) {
+      return;
+    }
+
+    // Dispatch thêm sinh viên 
+    dispatch(baiTapFormActions.addStudent(formValue));
+    clearForm();
+  };
+
+  // handle cập nhật sinh viên
+  const handleSubmitUpdate = (ev) => {
+    ev.preventDefault();
+    // Check điều kiện lỗi
+    const errors = validateForm();
+    if (hasErrors(errors)) {
+      return;
+    }
+
+    // Dispatch cập nhật sinh viên
+    dispatch(baiTapFormActions.updateStudent(formValue));
+    clearForm();
+  };
+
   return (
-    <div>
+    <div className='px-3'>
       <form onSubmit={studentEdit ? handleSubmitUpdate : handleSubmitAdd} className="row">
-        {/* Column 1: Mã sinh viên and Số điện thoại */}
         <div className="col-md-6">
           <div className="mb-1">
             <label htmlFor="maSV" className="form-label">
@@ -199,7 +184,6 @@ const handleSubmitAdd = (ev) => {
             <div className="invalid-feedback">{formError.soDienThoai}</div>
           </div>
         </div>
-        {/* Column 2: Họ Tên and Email */}
         <div className="col-md-6">
           <div className="mb-1">
             <label htmlFor="hoTen" className="form-label">
@@ -232,14 +216,13 @@ const handleSubmitAdd = (ev) => {
             <div className="invalid-feedback">{formError.email}</div>
           </div>
         </div>
-        {/* Submit button */}
         <div className="col-md-12">
           {studentEdit ? (
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-success">
               Cập nhật sinh viên
             </button>
           ) : (
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-success">
               Thêm sinh viên
             </button>
           )}

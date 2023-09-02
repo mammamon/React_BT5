@@ -7,7 +7,7 @@ const StudentTable = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="mt-5">
+    <div className="mt-4">
       <table className="table">
         <thead className="table-dark">
           <tr>
@@ -33,7 +33,7 @@ const StudentTable = () => {
                       dispatch(baiTapFormActions.editStudent(student));
                     }}
                   >
-                    Edit
+                    Sửa
                   </button>
                   <button
                     className="btn-delete btn btn-danger"
@@ -41,7 +41,7 @@ const StudentTable = () => {
                       dispatch(baiTapFormActions.deleteStudent(student.maSV));
                     }}
                   >
-                    Delete
+                    Xóa
                   </button>
                 </div>
               </td>
