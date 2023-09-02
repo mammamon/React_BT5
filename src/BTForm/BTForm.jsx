@@ -7,7 +7,7 @@ const BTForm = () => {
   const { studentList } = useSelector((state) => state.baiTapForm);
   return (
     <div>
-      <div className='p-2 mb-4 bg-dark'>
+      <div className='px-3 py-1 mb-4 bg-dark'>
         <h2 className='text-white'>Thông tin sinh viên</h2>
       </div>
       <StudentForm studentList={studentList} />

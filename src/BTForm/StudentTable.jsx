@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { baiTapFormActions } from '../store/baiTapForm/slice';
 
 const StudentTable = () => {
   const { studentList } = useSelector((state) => state.baiTapForm);
   const dispatch = useDispatch();
+  //chức năng tìm kiếm
+  const [searchQuery, setSearchQuery] = useState('');
+  const filteredStudents = studentList.filter((student) => {
+    const studentInfo = `${student.maSV} ${student.hoTen} ${student.soDienThoai} ${student.email}`;
+    return studentInfo.toLowerCase().includes(searchQuery.toLowerCase());
+  });
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
   return (
     <div className="mt-4">
+      <div className="mb-4 px-3">
+        <input
+          type="text"
+          placeholder="Tìm kiếm thông tin sinh viên..."
+          className="form-control"
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+      </div>
       <table className="table">
         <thead className="table-dark">
           <tr>
@@ -19,7 +37,7 @@ const StudentTable = () => {
           </tr>
         </thead>
         <tbody>
-          {studentList.map((student) => (
+          {filteredStudents.map((student) => (
             <tr key={student.maSV}>
               <td className="text-center">{student.maSV}</td>
               <td className="text-center">{student.hoTen}</td>

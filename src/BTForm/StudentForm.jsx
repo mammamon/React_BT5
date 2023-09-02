@@ -222,7 +222,7 @@ const StudentForm = ({ studentList }) => {
               Cập nhật sinh viên
             </button>
           ) : (
-            <button type="submit" className="btn btn-success">
+            <button type="submit" className="btn btn-primary">
               Thêm sinh viên
             </button>
           )}
