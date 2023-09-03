@@ -165,6 +165,7 @@ const StudentForm = ({ studentList }) => {
               value={formValue.maSV}
               onChange={handleFormValue('maSV')}
               required
+              disabled={studentEdit !== undefined} // disable khi đang sửa
             />
             <div className="invalid-feedback">{formError.maSV}</div>
           </div>
